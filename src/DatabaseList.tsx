@@ -36,7 +36,7 @@ const DatabaseList: React.FC<Props> = ({ submittedData }) => {
             <TableCell align="right">Address</TableCell>
             <TableCell align="right">state</TableCell>
             <TableCell align="right">City</TableCell>
-            <TableCell align="right">Countrye</TableCell>
+            <TableCell align="right">Country</TableCell>
             <TableCell align="right">Pincode</TableCell>
           </TableRow>
         </TableHead>
