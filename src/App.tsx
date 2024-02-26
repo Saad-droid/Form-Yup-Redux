@@ -1,24 +1,35 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PersonalDetailsForm from './PersonalDetailsForm';
+import { log } from 'console';
+import ParentComponent from './PersonalDetailsForm';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Step1Form from './Step1Form';
+import { Provider } from 'react-redux';
+import Step2Form from './Step2Form';
 
+
+import { combineReducers } from 'redux'
+import { createStore } from 'redux';
+import store from './redux/store';
+
+// import { RootState } from './redux/store';}
 function App() {
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<Step1Form  />} />
+          <Route path="/step2" element={<Step2Form />} />
+        </Routes>
+      </div>
+    </Router>
+    </Provider>
     </div>
   );
 }
