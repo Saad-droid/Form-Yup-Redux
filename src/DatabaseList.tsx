@@ -19,16 +19,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 // Define component props
 type Props = PropsFromRedux;
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
 
 
 const DatabaseList: React.FC<Props> = ({ submittedData }) => {

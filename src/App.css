@@ -37,7 +37,7 @@ li{
   transform: translate(0.3s);
 }
 li:hover{
-  background-color: rgb(210, 134, 40);
+  background-color: rgb(172, 165, 156);
   cursor: pointer;
 }
 

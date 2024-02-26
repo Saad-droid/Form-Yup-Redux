@@ -1,11 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
 import * as Yup from "yup";
-import { useDispatch ,useSelector} from "react-redux";
-import { submitFormData } from "./redux/action";
-import DatabaseList from "./DatabaseList";
+import { useDispatch, useSelector } from "react-redux";
+import { submitFormData } from "../redux/action";
+import DatabaseList from "../DatabaseList";
 import { TextField, Button } from "@mui/material";
-import { useNavigate,useLocation } from "react-router-dom";
-import { RootState } from "./redux/store";
+import { RootState } from "../redux/store";
 
 interface FormData {
   address: string;
@@ -31,7 +30,7 @@ const FormWithYup2: React.FC = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [countryOptions, setCountryOptions] = useState<string[]>([])
-  
+
 
   const validationSchema = Yup.object({
     firstName: Yup.string().optional(),
@@ -51,12 +50,12 @@ const FormWithYup2: React.FC = () => {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       console.log("Form Submitted", formData);
-      
-   const index=personalDetails.length-1
-    const mergedData = { ...personalDetails[index], ...formData };
-    
-    dispatch(submitFormData(mergedData));
-      
+
+      const index = personalDetails.length - 1
+      const mergedData = { ...personalDetails[index], ...formData };
+
+      dispatch(submitFormData(mergedData));
+
 
     } catch (error) {
       console.log(error)
@@ -76,20 +75,12 @@ const FormWithYup2: React.FC = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
 
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
   const handleCountryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    
+
     fetchCountryOptions(value);
   };
 
@@ -105,7 +96,7 @@ const FormWithYup2: React.FC = () => {
   };
   const handleSelectCountry = (country: string) => {
     setFormData({ ...formData, country });
-    setCountryOptions([]); 
+    setCountryOptions([]);
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -120,44 +111,24 @@ const FormWithYup2: React.FC = () => {
     <form className="form" onSubmit={handleSubmit}>
       <div>
         <h3>Address Details</h3>
-
-        {/* <label>Address</label> */}
         <TextField id="outlined-basic" label="Address" variant="outlined" onChange={handleChangeText}
-
           type="text"
           name="address"
           value={formData.address}
           placeholder="Enter your address" />
-        {/* <input
-          type="text"
-          name="address"
-          value={formData.address}
-          placeholder="Enter your address"
-          onChange={handleChange}
-        /> */}
         {errors.address && <div className="error">{errors.address}</div>}
       </div>
       <div>
-        {/* <label>state</label> */}
         <TextField id="outlined-basic" label="State" variant="outlined" onChange={handleChangeText}
-
           type="text"
-
           name="state"
           value={formData.state}
           placeholder="Enter your state"
         />
-        {/* <input
-          type="text"
-          name="state"
-          value={formData.state}
-          placeholder="Enter your state"
-          onChange={handleChange}
-        /> */}
+
         {errors.state && <div className="error">{errors.state}</div>}
       </div>
       <div>
-        {/* <label>City</label> */}
         <TextField id="outlined-basic" label="City" variant="outlined" onChange={handleChangeText}
 
           type="text"
@@ -165,32 +136,15 @@ const FormWithYup2: React.FC = () => {
           value={formData.city}
           placeholder="Enter your city"
         />
-
-        {/* <input
-          type="text"
-          name="city"
-          value={formData.city}
-          placeholder="Enter your city"
-          onChange={handleChange}
-        /> */}
         {errors.city && <div className="error">{errors.city}</div>}
       </div>
       <div>
-        {/* <label>Country:</label> */}
         <TextField id="outlined-basic" label="Country" variant="outlined" onChange={handleCountryChange}
           type="text"
           name="country"
           value={formData.country}
           placeholder="Enter your country"
         />
-
-        {/* <input
-          type="text"
-          name="country"
-          value={formData.country}
-          placeholder="Enter your country"
-          onChange={handleCountryChange}
-        /> */}
         {countryOptions.length > 0 && (
           <ul>
             {countryOptions.map((country) => (
@@ -201,25 +155,16 @@ const FormWithYup2: React.FC = () => {
         {errors.country && <div className="error">{errors.country}</div>}
       </div>
       <div>
-        {/* <label>Pincode</label> */}
-        <TextField id="outlined-basic" label="Pincode" variant="outlined" 
+        <TextField id="outlined-basic" label="Pincode" variant="outlined"
           type="text"
           name="pincode"
           value={formData.pincode}
           placeholder="Enter your pincode"
           onChange={handleChangeText}
         />
-        {/* <input
-          type="text"
-          name="pincode"
-          value={formData.pincode}
-          placeholder="Enter your pincode"
-          onChange={handleChangeText}
-        /> */}
         {errors.pincode && <div className="error">{errors.pincode}</div>}
       </div>
       <Button type="submit" variant="contained">Submit</Button>
-
       <DatabaseList />
     </form>
   );
